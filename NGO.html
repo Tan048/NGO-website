@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hope Foundation - Making a Difference</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --success-color: #4facfe;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --shadow-soft: 0 10px 40px rgba(0,0,0,0.1);
+            --shadow-strong: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            opacity: 0.05;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { width: 20px; height: 20px; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 15px; height: 15px; left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { width: 25px; height: 25px; left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { width: 18px; height: 18px; left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { width: 22px; height: 22px; left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { width: 16px; height: 16px; left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { width: 24px; height: 24px; left: 70%; animation-delay: 6s; }
+        .particle:nth-child(8) { width: 19px; height: 19px; left: 80%; animation-delay: 7s; }
+        .particle:nth-child(9) { width: 21px; height: 21px; left: 90%; animation-delay: 8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-dark) !important;
+            transition: all 0.3s ease;
+            position: relative;
+            margin: 0 10px;
+            padding: 10px 15px !important;
+            border-radius: 25px;
+        }
+
+        .nav-link:hover {
+            background: var(--gradient-primary);
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 140px 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .btn-hero {
+            background: var(--gradient-warm);
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .btn-hero:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--shadow-strong);
+            color: white;
+        }
+
+        /* Floating Hero Elements */
+        .hero-decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            right: 10%;
+            top: 20%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .hero-decoration::before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            top: 25px;
+            left: 25px;
+            animation: pulse 4s ease-in-out infinite 1s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* Glass Card Effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--gradient-success);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="white" opacity="0.1"><animate attributeName="opacity" values="0.1;0.3;0.1" dur="3s" repeatCount="indefinite"/></circle><circle cx="80" cy="40" r="1.5" fill="white" opacity="0.15"><animate attributeName="opacity" values="0.15;0.4;0.15" dur="4s" repeatCount="indefinite"/></circle><circle cx="40" cy="80" r="2.5" fill="white" opacity="0.1"><animate attributeName="opacity" values="0.1;0.25;0.1" dur="5s" repeatCount="indefinite"/></circle></svg>');
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 40px 30px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-15px) scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            display: block;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .about-image {
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow-strong);
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .about-image:hover::before {
+            opacity: 0.1;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Mission Cards */
+        .mission-card {
+            background: white;
+            padding: 50px 30px;
+            border-radius: 25px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+            text-align: center;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+        }
+
+        .mission-card:hover {
+            transform: translateY(-15px) rotateY(5deg);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .mission-icon {
+            font-size: 4rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .mission-card:hover .mission-icon {
+            transform: scale(1.2) rotateY(360deg);
+        }
+
+        .mission-card h4 {
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .mission-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Volunteer Form */
+        .volunteer-section {
+            background: var(--gradient-secondary);
+            padding: 120px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .volunteer-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 60px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-strong);
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 15px;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .form-control:focus {
+            background: white;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.5), inset 0 2px 4px rgba(0,0,0,0.1);
+            border: none;
+            outline: none;
+            transform: translateY(-2px);
+        }
+
+        .form-label {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .btn-submit {
+            background: var(--gradient-warm);
+            color: white;
+            padding: 18px 50px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            width: 100%;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .btn-submit:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-strong);
+        }
+
+        /* Success Message */
+        .success-message {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            display: none;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="0,100 100,0 100,100" fill="rgba(255,255,255,0.02)"/></svg>');
+        }
+
+        .footer h5 {
+            color: white;
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .social-links a {
+            font-size: 1.8rem;
+            margin: 0 15px;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            color: white;
+            transform: translateY(-5px) scale(1.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero p { font-size: 1.2rem; }
+            .section-title { font-size: 2.5rem; }
+            .form-container { padding: 40px 25px; }
+            .stat-number { font-size: 3rem; }
+            .mission-icon { font-size: 3rem; }
+        }
+
+        @media (max-width: 576px) {
+            .hero { padding: 100px 0; }
+            .hero h1 { font-size: 2.2rem; }
+            .stats, .about, .volunteer-section { padding: 80px 0; }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--gradient-warm);
+            z-index: 9998;
+            transition: width 0.1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-heart me-2"></i>Hope Foundation
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#volunteer">Volunteer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-decoration"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content" data-aos="fade-up" data-aos-duration="1000">
+                    <h1>Together We Can Change the World ✨</h1>
+                    <p>Join our global community of changemakers and help us create a brighter future for everyone. Every small action creates ripples of positive change.</p>
+                    <a href="#volunteer" class="btn-hero">
+                        <i class="fas fa-rocket me-2"></i>Start Your Journey
+                    </a>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1200">
+                    <div class="glass-card text-center">
+                        <i class="fas fa-globe-americas" style="font-size: 4rem; margin-bottom: 20px; color: white;"></i>
+                        <h3 style="color: white; margin-bottom: 15px;">Global Impact</h3>
+                        <p style="color: rgba(255,255,255,0.9); margin: 0;">Making a difference in 25+ countries worldwide</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-card">
+                        <span class="stat-number" data-target="50000">0</span>
+                        <div class="stat-label">Lives Transformed</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-card">
+                        <span class="stat-number" data-target="1200">0</span>
+                        <div class="stat-label">Active Heroes</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-card">
+                        <span class="stat-number" data-target="25">0</span>
+                        <div class="stat-label">Countries Reached</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="stat-card">
+                        <span class="stat-number" data-target="15">0</span>
+                        <div class="stat-label">Years of Magic</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">About Our Mission 🌟</h2>
+                <p class="lead" style="color: var(--text-light); font-size: 1.3rem;">Discover the story behind our passion for change</p>
+            </div>
+            
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="about-text">
+                        <h3 style="color: var(--primary-color); font-size: 2.2rem; margin-bottom: 25px;">Our Story of Hope 💫</h3>
+                        <p>Founded in 2009 with a simple belief: that every person deserves a chance to thrive. What started as a small group of passionate individuals has grown into a global movement of changemakers.</p>
+                        <p>We've witnessed the incredible power of community, the strength that emerges when people come together for a common cause, and the magic that happens when hope meets action.</p>
+                        <p>Our innovative approaches have revolutionized humanitarian work, creating sustainable solutions that don't just help for today, but build foundations for tomorrow.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Our amazing team in action" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mission Cards -->
+            <div class="row mt-5">
+                <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="100">
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>Education Revolution 🎓</h4>
+                        <p>Transforming lives through innovative learning programs that unlock potential and create opportunities for brighter futures.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="200">
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h4>Healthcare Heroes 💊</h4>
+                        <p>Bringing essential medical care and wellness programs to underserved communities with compassion and cutting-edge solutions.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="300">
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4>Planet Guardians 🌱</h4>
+                        <p>Protecting our beautiful planet through sustainable practices and environmental initiatives that ensure a green future for generations to come.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Form Section -->
+    <section id="volunteer" class="volunteer-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="text-center mb-5" data-aos="fade-up">
+                        <h2 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 20px;">Join Our Super Team! 🚀</h2>
+                        <p style="font-size: 1.3rem; opacity: 0.9;">Ready to become a hero? Fill out this magical form and let's change the world together!</p>
+                    </div>
+                    <div class="form-container" data-aos="zoom-in" data-aos-delay="200">
+                        <form id="volunteerForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label">✨ First Name *</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="Your awesome first name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label">🌟 Last Name *</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Your fantastic last name" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">📧 Email Address *</label>
+                                    <input type="email" class="form-control" id="email" placeholder="your.email@awesome.com" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">📱 Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" placeholder="+1 (555) 123-4567">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="age" class="form-label">🎂 Age</label>
+                                    <input type="number" class="form-control" id="age" min="16" max="100" placeholder="How young at heart are you?">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="availability" class="form-label">⏰ When can you spread magic?</label>
+                                    <select class="form-control" id="availability">
+                                        <option value="">Select your superpower time</option>
+                                        <option value="weekends">Weekends Warrior</option>
+                                        <option value="weekdays">Weekday Hero</option>
+                                        <option value="flexible">Flexible Champion</option>
+                                        <option value="fulltime">Full-time Superhero</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="interests" class="form-label">💝 What makes your heart sing?</label>
+                                    <select class="form-control" id="interests" multiple>
+                                        <option value="education">Education Revolution 🎓</option>
+                                        <option value="healthcare">Healthcare Heroes 💊</option>
+                                        <option value="environment">Planet Guardians 🌱</option>
+                                        <option value="community">Community Building 🏘️</option>
+                                        <option value="fundraising">Fundraising Magic 💰</option>
+                                        <option value="events">Event Organizing 🎉</option>
+                                    </select>
+                                    <small style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Hold Ctrl/Cmd to select multiple superpowers!</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="experience" class="form-label">🌈 Your Amazing Journey So Far</label>
+                                    <textarea class="form-control" id="experience" rows="4" placeholder="Tell us about your superhero adventures and volunteer experiences..."></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="motivation" class="form-label">💫 What drives your passion?</label>
+                                    <textarea class="form-control" id="motivation" rows="3" placeholder="Share what inspires you to make a difference..."></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="submit" class="btn-submit">
+                                        <i class="fas fa-rocket me-2"></i>Launch My Hero Journey!
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="success-message" id="successMessage">
+                                <i class="fas fa-check-circle me-2"></i>
+                                🎉 Amazing! Welcome to our hero family! We'll contact you within 48 hours to start your adventure!
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <h5><i class="fas fa-heart me-2"></i>Hope Foundation</h5>
+                    <p style="color: rgba(255,255,255,0.8); line-height: 1.7;">Making the world a more beautiful place, one heart at a time. Join us in creating ripples of kindness that turn into waves of change.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home">🏠 Home</a></li>
+                        <li class="mb-2"><a href="#about">🌟 About Us</a></li>
+                        <li class="mb-2"><a href="#volunteer">🚀 Volunteer</a></li>
+                        <li class="mb-2"><a href="#contact">📞 Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <h5>Our Impact</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">🎓 Education Revolution</a></li>
+                        <li class="mb-2"><a href="#">💊 Healthcare Heroes</a></li>
+                        <li class="mb-2"><a href="#">🌱 Planet Guardians</a></li>
+                        <li class="mb-2"><a href="#">🏘️ Community Building</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <h5>Connect With Us</h5>
+                    <p style="color: rgba(255,255,255,0.8);"><i class="fas fa-map-marker-alt me-2"></i>123 Hope Street, New Delhi, India 🇮🇳</p>
+                    <p style="color: rgba(255,255,255,0.8);"><i class="fas fa-phone me-2"></i>+91 98765 43210</p>
+                    <p style="color: rgba(255,255,255,0.8);"><i class="fas fa-envelope me-2"></i>hello@hopefoundation.org</p>
+                    <p style="color: rgba(255,255,255,0.8);"><i class="fas fa-clock me-2"></i>24/7 for emergencies ⚡</p>
+                </div>
+            </div>
+            <hr style="border-color: rgba(255,255,255,0.2); margin: 50px 0 30px;">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p style="color: rgba(255,255,255,0.7); margin: 0;">&copy; 2025 Hope Foundation. Made with 💖 and lots of ☕ for humanity | Privacy Policy | Terms of Service</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Loading screen
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Scroll progress bar
+        window.addEventListener('scroll', function() {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const headerOffset = 80;
+                const elementPosition = target.offsetTop;
+                const offsetPosition = elementPosition - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Enhanced navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 10px 40px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Enhanced form submission with animations
+        document.getElementById('volunteerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Form validation
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            
+            if (!firstName || !lastName || !email) {
+                // Create custom alert with beautiful styling
+                const alertDiv = document.createElement('div');
+                alertDiv.innerHTML = `
+                    <div style="background: rgba(255,107,107,0.9); color: white; padding: 15px 25px; border-radius: 15px; 
+                         position: fixed; top: 100px; left: 50%; transform: translateX(-50%); z-index: 10000;
+                         box-shadow: 0 10px 30px rgba(0,0,0,0.3); backdrop-filter: blur(10px);">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Please fill in all required fields! ✨
+                    </div>
+                `;
+                document.body.appendChild(alertDiv);
+                setTimeout(() => alertDiv.remove(), 3000);
+                return;
+            }
+            
+            // Animate button
+            const submitBtn = document.querySelector('.btn-submit');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Launching Your Journey...';
+            submitBtn.style.background = 'var(--gradient-success)';
+            
+            // Show success message after delay
+            setTimeout(() => {
+                const successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block';
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = 'var(--gradient-warm)';
+                }, 1000);
+                
+                // Hide success message after 6 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 6000);
+                
+                // Add confetti effect
+                createConfetti();
+            }, 2000);
+        });
+
+        // Confetti effect function
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    width: 10px;
+                    height: 10px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    left: ${Math.random() * 100}vw;
+                    top: -10px;
+                    z-index: 10000;
+                    border-radius: 50%;
+                    pointer-events: none;
+                    animation: confettiFall 3s ease-out forwards;
+                `;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        // Add confetti animation to CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confettiFall {
+                to {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Enhanced counter animation for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 3000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    let displayValue = Math.floor(current);
+                    if (target >= 1000) {
+                        displayValue = displayValue.toLocaleString() + '+';
+                    }
+                    counter.textContent = displayValue;
+                }, 16);
+            });
+        }
+
+        // Trigger counter animation when stats section is in view
+        const statsSection = document.querySelector('.stats');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(statsSection);
+
+        // Add dynamic cursor trail effect
+        const trail = [];
+        const trailLength = 20;
+
+        document.addEventListener('mousemove', function(e) {
+            trail.push({ x: e.clientX, y: e.clientY });
+            if (trail.length > trailLength) {
+                trail.shift();
+            }
+        });
+
+        function createTrailEffect() {
+            const canvas = document.createElement('canvas');
+            canvas.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 9999;
+            `;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            document.body.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                trail.forEach((point, index) => {
+                    const opacity = index / trailLength;
+                    const size = (index / trailLength) * 5;
+                    
+                    ctx.beginPath();
+                    ctx.arc(point.x, point.y, size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(102, 126, 234, ${opacity * 0.3})`;
+                    ctx.fill();
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+
+        // Initialize trail effect on desktop
+        if (window.innerWidth > 768) {
+            createTrailEffect();
+        }
+
+        // Add hover effects to cards
+        document.querySelectorAll('.mission-card, .glass-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+                this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Enhanced typing effect for hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+
+        // Apply typing effect when page loads
+        setTimeout(() => {
+            const heroTitle = document.querySelector('.hero h1');
+            const originalText = heroTitle.textContent;
+            typeWriter(heroTitle, originalText, 80);
+        }, 1500);
+    </script>
+</body>
+</html>
